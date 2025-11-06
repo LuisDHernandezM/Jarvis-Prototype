@@ -10,7 +10,7 @@ from elevenlabs.conversational_ai.default_audio_interface import DefaultAudioInt
 from elevenlabs.types import ConversationConfig
 
 AGENT_ID = os.getenv("AGENT_ID")
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("XI_API_KEY")
 
 user_name = "Luis"
 schedule = "Computer Science classes at 12:00; Gym with Maya at 17:00"
@@ -34,14 +34,6 @@ config = ConversationConfig(
 
 client = ElevenLabs(api_key=API_KEY)
 
-conversation = Conversation(
-  client,
-  AGENT_ID,
-  config=config,
-  requires_auth=True,
-  audio_interface=DefaultAudioInterface(),
-)
-
 def print_agent_response(response):
   print(f"Agent: {response}")
 
@@ -52,8 +44,8 @@ def print_user_transcript(transcript):
   print(f"User: {transcript}")
 
 conversation = Conversation(
-  client,
-  AGENT_ID,
+  client=client,
+  agent_id=AGENT_ID,
   config=config,
   requires_auth=True,
   audio_interface=DefaultAudioInterface(),
